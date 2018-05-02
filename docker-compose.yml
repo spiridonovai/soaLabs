@@ -1,0 +1,117 @@
+version: '3'
+services:
+  traefik:
+    image: traefik
+    command: -c /dev/null --web --docker
+    labels:
+      - "traefik.enable=false"
+    ports:
+      - "80:80"
+      - "8080:8080"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+
+  eureka:
+    image: my_dockerhub_user/eureka
+    labels:
+      - "traefik.port=8761"
+      - "traefik.backend=eureka"
+      - "traefik.frontend.rule=PathPrefixStrip:/eureka"
+    depends_on:
+      - traefik
+<<<<<<< HEAD
+      - eureka
+  zuul:
+    image: my_dockerhub_user/zuul
+    labels:
+      - "traefik.port=8080"
+      - "traefik.backend=zuul"
+      - "traefik.frontend.rule=PathPrefixStrip:/zuul"
+    depends_on:
+      - traefik
+      - eureka
+
+=======
+>>>>>>> 724284840acf49c022afc40adc90f77e633d5853
+
+  app1:
+    image: my_dockerhub_user/app1
+    labels:
+<<<<<<< HEAD
+      - "traefik.enable=false"
+=======
+      - "traefik.port=8080"
+      - "traefik.backend=app1"
+      - "traefik.frontend.rule=PathPrefixStrip:/app1"
+>>>>>>> 724284840acf49c022afc40adc90f77e633d5853
+    depends_on:
+      - traefik
+      - mysql
+      - eureka
+<<<<<<< HEAD
+      - zuul
+=======
+>>>>>>> 724284840acf49c022afc40adc90f77e633d5853
+    links:
+      - mysql
+      - eureka
+
+  app2:
+    image: my_dockerhub_user/app2
+    labels:
+<<<<<<< HEAD
+      - "traefik.enable=false"
+=======
+      - "traefik.port=8080"
+      - "traefik.backend=app2"
+      - "traefik.frontend.rule=PathPrefixStrip:/app2"
+>>>>>>> 724284840acf49c022afc40adc90f77e633d5853
+    depends_on:
+      - traefik
+      - mysql
+      - eureka
+<<<<<<< HEAD
+      - zuul
+=======
+>>>>>>> 724284840acf49c022afc40adc90f77e633d5853
+    links:
+      - mysql
+      - eureka
+
+  app3:
+      image: my_dockerhub_user/app3
+      labels:
+<<<<<<< HEAD
+        - "traefik.enable=false"
+=======
+        - "traefik.port=8080"
+        - "traefik.backend=app2"
+        - "traefik.frontend.rule=PathPrefixStrip:/app2"
+>>>>>>> 724284840acf49c022afc40adc90f77e633d5853
+      depends_on:
+        - traefik
+        - mysql
+        - eureka
+<<<<<<< HEAD
+        - zuul
+=======
+>>>>>>> 724284840acf49c022afc40adc90f77e633d5853
+      links:
+        - mysql
+        - eureka
+
+
+  mysql:
+    image: mysql
+    environment:
+      - MYSQL_USER=dbuser
+      - MYSQL_PASSWORD=dbp4ss
+      - MYSQL_DATABASE=demo
+      - MYSQL_ROOT_PASSWORD=blabla
+    labels:
+      - "traefik=enable=false"
+    volumes:
+       - mysql-volume:/var/lib/mysql
+
+volumes:
+  mysql-volume: {}

@@ -19,7 +19,7 @@ services:
       - "traefik.frontend.rule=PathPrefixStrip:/eureka"
     depends_on:
       - traefik
-      - eureka
+
   zuul:
     image: my_dockerhub_user/zuul
     labels:

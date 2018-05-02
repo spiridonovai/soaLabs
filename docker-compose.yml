@@ -19,7 +19,6 @@ services:
       - "traefik.frontend.rule=PathPrefixStrip:/eureka"
     depends_on:
       - traefik
-<<<<<<< HEAD
       - eureka
   zuul:
     image: my_dockerhub_user/zuul
@@ -31,27 +30,18 @@ services:
       - traefik
       - eureka
 
-=======
->>>>>>> 724284840acf49c022afc40adc90f77e633d5853
-
   app1:
     image: my_dockerhub_user/app1
     labels:
-<<<<<<< HEAD
       - "traefik.enable=false"
-=======
       - "traefik.port=8080"
       - "traefik.backend=app1"
       - "traefik.frontend.rule=PathPrefixStrip:/app1"
->>>>>>> 724284840acf49c022afc40adc90f77e633d5853
     depends_on:
       - traefik
       - mysql
       - eureka
-<<<<<<< HEAD
       - zuul
-=======
->>>>>>> 724284840acf49c022afc40adc90f77e633d5853
     links:
       - mysql
       - eureka
@@ -59,21 +49,15 @@ services:
   app2:
     image: my_dockerhub_user/app2
     labels:
-<<<<<<< HEAD
       - "traefik.enable=false"
-=======
       - "traefik.port=8080"
       - "traefik.backend=app2"
       - "traefik.frontend.rule=PathPrefixStrip:/app2"
->>>>>>> 724284840acf49c022afc40adc90f77e633d5853
     depends_on:
       - traefik
       - mysql
       - eureka
-<<<<<<< HEAD
       - zuul
-=======
->>>>>>> 724284840acf49c022afc40adc90f77e633d5853
     links:
       - mysql
       - eureka
@@ -81,21 +65,15 @@ services:
   app3:
       image: my_dockerhub_user/app3
       labels:
-<<<<<<< HEAD
         - "traefik.enable=false"
-=======
         - "traefik.port=8080"
         - "traefik.backend=app2"
         - "traefik.frontend.rule=PathPrefixStrip:/app2"
->>>>>>> 724284840acf49c022afc40adc90f77e633d5853
       depends_on:
         - traefik
         - mysql
         - eureka
-<<<<<<< HEAD
         - zuul
-=======
->>>>>>> 724284840acf49c022afc40adc90f77e633d5853
       links:
         - mysql
         - eureka

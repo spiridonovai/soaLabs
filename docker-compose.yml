@@ -30,13 +30,13 @@ services:
       - traefik
       - eureka
   gateway:
-    image:my_dockerhub_user/app1
+    image: my_dockerhub_user/app1
     labels:
         - "traefik.enable=false"
     depends_on:
-        -traefik
-        -eureka
-        -zuul
+        - traefik
+        - eureka
+        - zuul
 
   app1:
     image: my_dockerhub_user/app1

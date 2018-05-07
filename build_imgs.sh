@@ -24,6 +24,12 @@ echo "building zuul docker image"
 cd zuul
 mvn package docker:build
 cd ..
+echo "building gateway docker image"
+cd gateway
+mvn package docker:build
+cd ..
+
+
 
 
 echo "You are ready to start docker-compose: docker-compose up"

@@ -29,14 +29,20 @@ services:
     depends_on:
       - traefik
       - eureka
+  gateway:
+    image:my_dockerhub_user/app1
+    labels:
+        - "traefik.enable=false"
+    depends_on:
+        -traefik
+        -eureka
+        -zuul
 
   app1:
     image: my_dockerhub_user/app1
     labels:
       - "traefik.enable=false"
-      - "traefik.port=8080"
-      - "traefik.backend=app1"
-      - "traefik.frontend.rule=PathPrefixStrip:/app1"
+    
     depends_on:
       - traefik
       - mysql
@@ -50,9 +56,7 @@ services:
     image: my_dockerhub_user/app2
     labels:
       - "traefik.enable=false"
-      - "traefik.port=8080"
-      - "traefik.backend=app2"
-      - "traefik.frontend.rule=PathPrefixStrip:/app2"
+     
     depends_on:
       - traefik
       - mysql
@@ -66,9 +70,7 @@ services:
       image: my_dockerhub_user/app3
       labels:
         - "traefik.enable=false"
-        - "traefik.port=8080"
-        - "traefik.backend=app2"
-        - "traefik.frontend.rule=PathPrefixStrip:/app2"
+       
       depends_on:
         - traefik
         - mysql
@@ -90,6 +92,6 @@ services:
       - "traefik=enable=false"
     volumes:
        - mysql-volume:/var/lib/mysql
-
+  
 volumes:
   mysql-volume: {}
